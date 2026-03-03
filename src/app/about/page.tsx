@@ -1,89 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import {
-  SiNextdotjs,
-  SiReact,
-  SiTypescript,
-  SiTailwindcss,
-  SiNodedotjs,
-  SiPython,
-  SiGit,
-  SiDocker,
-  SiFigma,
-  SiPostgresql,
-  SiMongodb,
-  SiLinux,
-} from "react-icons/si";
-
-const educationData = [
-  {
-    institution: "Universitas Teknologi Digital",
-    year: "2022 - Present",
-    title: "Bachelor of Computer Science",
-    points: [
-      "Majoring in Software Engineering.",
-      "Active member of Cyber Security Club.",
-      "GPA: 3.8/4.0 (Current).",
-    ],
-  },
-  {
-    institution: "SMA Negeri 1 Kota Cyber",
-    year: "2019 - 2022",
-    title: "Science Major (IPA)",
-    points: [
-      "Head of IT Division at Student Council.",
-      "Winner of National Web Design Competition.",
-      "Focused on Physics and Mathematics.",
-    ],
-  },
-];
-
-const experienceData = [
-  {
-    institution: "Tech Startup Inc.",
-    year: "2023 - Present",
-    title: "Frontend Developer Intern",
-    points: [
-      "Developed responsive UI using React & Tailwind.",
-      "Collaborated with backend team for API integration.",
-      "Optimized website performance by 30%.",
-    ],
-  },
-  {
-    institution: "Freelance Warrior",
-    year: "2022 - 2023",
-    title: "Fullstack Web Developer",
-    points: [
-      "Built custom CMS for local businesses.",
-      "Managed deployment on VPS and domain setup.",
-      "Provided maintenance and bug fixing.",
-    ],
-  },
-];
-
-const techStack = [
-  {
-    name: "Next.js",
-    icon: <SiNextdotjs />,
-    color: "hover:text-black dark:hover:text-white",
-  },
-  { name: "React", icon: <SiReact />, color: "hover:text-[#61DAFB]" },
-  { name: "TypeScript", icon: <SiTypescript />, color: "hover:text-[#3178C6]" },
-  { name: "Tailwind", icon: <SiTailwindcss />, color: "hover:text-[#06B6D4]" },
-  { name: "Node.js", icon: <SiNodedotjs />, color: "hover:text-[#339933]" },
-  { name: "Python", icon: <SiPython />, color: "hover:text-[#3776AB]" },
-  { name: "Git", icon: <SiGit />, color: "hover:text-[#F05032]" },
-  { name: "Docker", icon: <SiDocker />, color: "hover:text-[#2496ED]" },
-  { name: "Figma", icon: <SiFigma />, color: "hover:text-[#F24E1E]" },
-  { name: "SQL", icon: <SiPostgresql />, color: "hover:text-[#4169E1]" },
-  { name: "MongoDB", icon: <SiMongodb />, color: "hover:text-[#47A248]" },
-  { name: "Linux", icon: <SiLinux />, color: "hover:text-[#FCC624]" },
-];
+import { educationData, experienceData, techStack } from "./data";
 
 export default function AboutPage() {
   const [activeTab, setActiveTab] = useState<"education" | "experience">(
-    "education"
+    "education",
   );
   const [hoveredTech, setHoveredTech] = useState<string | null>(null);
 
@@ -164,7 +86,7 @@ export default function AboutPage() {
 
         <div className="h-16 border-4 border-snes-textLight dark:border-snes-textDark bg-black flex items-center justify-center mb-4 transition-all">
           {hoveredTech ? (
-            <span className="text-xl md:text-2xl font-mono text-snes-accent animate-pulse uppercase">
+            <span className="text-xl md:text-2xl font-mono text-snes-accent animate-pulse uppercase text-center w-full truncate px-4">
               &gt; DETECTED: {hoveredTech}_
             </span>
           ) : (
@@ -174,7 +96,7 @@ export default function AboutPage() {
           )}
         </div>
 
-        <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+        <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4">
           {techStack.map((tech, index) => (
             <div
               key={index}
@@ -182,7 +104,7 @@ export default function AboutPage() {
               onMouseLeave={() => setHoveredTech(null)}
               className={`
                 aspect-square border-4 border-snes-textLight dark:border-snes-textDark 
-                bg-white dark:bg-black flex items-center justify-center text-4xl 
+                bg-white dark:bg-black flex items-center justify-center text-3xl sm:text-4xl 
                 text-gray-400 cursor-crosshair transition-all duration-200
                 hover:scale-110 hover:border-snes-accent hover:bg-gray-100 dark:hover:bg-gray-900
                 ${tech.color}

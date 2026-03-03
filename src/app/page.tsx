@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Typewriter from "../components/Typewriter";
 import avatarImg from "../assets/images/avatar.png";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -28,9 +29,12 @@ export default function Home() {
           </div>
 
           <div className="pt-4">
-            <button className="px-6 py-2 border-2 border-snes-textLight dark:border-snes-textDark hover:bg-snes-textLight hover:text-snes-light dark:hover:bg-snes-textDark dark:hover:text-snes-dark transition-all uppercase text-sm font-bold">
-              [ DOWNLOAD CV ]
-            </button>
+            <Link
+              href="/resume"
+              className="inline-block px-6 py-2 border-2 border-snes-textLight dark:border-snes-textDark hover:bg-snes-textLight hover:text-snes-light dark:hover:bg-snes-textDark dark:hover:text-snes-dark transition-all uppercase text-sm font-bold cursor-pointer"
+            >
+              [ SCAN RESUME ]
+            </Link>
           </div>
         </div>
       </section>
