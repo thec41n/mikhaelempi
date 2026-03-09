@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { getSortedPostsData } from "../../lib/posts";
+import BlogClient from "./BlogClient";
 
 export default function BlogPage() {
   const allPosts = getSortedPostsData();
@@ -16,31 +16,7 @@ export default function BlogPage() {
         </p>
       </header>
 
-      <div className="grid gap-6">
-        {allPosts.map(({ id, date, title, tags }) => (
-          <Link href={`/blog/${id}`} key={id} className="group">
-            <article className="border-4 border-snes-textLight dark:border-snes-textDark p-4 bg-white/50 dark:bg-black/20 hover:bg-snes-textLight hover:text-snes-light dark:hover:bg-snes-textDark dark:hover:text-snes-dark transition-all cursor-pointer">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-2">
-                <h2 className="text-xl font-bold uppercase group-hover:text-snes-accent dark:group-hover:text-snes-dark">
-                  {title}
-                </h2>
-                <span className="text-sm font-mono opacity-70">{date}</span>
-              </div>
-
-              <div className="flex gap-2 mt-2">
-                {tags?.map((tag) => (
-                  <span
-                    key={tag}
-                    className="text-xs border border-current px-2 py-0.5 opacity-60"
-                  >
-                    #{tag}
-                  </span>
-                ))}
-              </div>
-            </article>
-          </Link>
-        ))}
-      </div>
+      <BlogClient initialPosts={allPosts} />
     </div>
   );
 }

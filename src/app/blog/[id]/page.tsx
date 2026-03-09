@@ -1,4 +1,6 @@
+import Link from "next/link";
 import { getSortedPostsData, getPostData } from "../../../lib/posts";
+import RetroContent from "./RetroContent";
 
 export async function generateStaticParams() {
   const posts = getSortedPostsData();
@@ -17,6 +19,15 @@ export default async function Post({
 
   return (
     <article className="max-w-none">
+      <div className="mb-6">
+        <Link
+          href="/blog"
+          className="inline-block font-mono text-sm font-bold uppercase text-snes-textLight dark:text-snes-textDark hover:text-snes-accent dark:hover:text-snes-accent hover:-translate-x-1 transition-transform"
+        >
+          &lt;&lt; BACK TO LOGS
+        </Link>
+      </div>
+
       <header className="border-b-4 border-dashed border-snes-textLight dark:border-snes-textDark pb-6 mb-8 text-center">
         <h1 className="text-3xl md:text-5xl font-bold uppercase text-snes-textLight dark:text-snes-textDark mb-4">
           {postData.title}
@@ -27,10 +38,7 @@ export default async function Post({
         </div>
       </header>
 
-      <div
-        className="prose-retro text-lg leading-relaxed space-y-4"
-        dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
-      />
+      <RetroContent htmlContent={postData.contentHtml} />
     </article>
   );
 }
