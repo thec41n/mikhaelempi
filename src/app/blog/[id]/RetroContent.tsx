@@ -1,9 +1,48 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function RetroContent({ htmlContent }: { htmlContent: string }) {
   const contentRef = useRef<HTMLDivElement>(null);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [zoomed, setZoomed] = useState<{ src: string; alt: string } | null>(
+    null,
+  );
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const container = contentRef.current;
+    if (!container) return;
+
+    const onClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (target.tagName !== "IMG") return;
+
+      const img = target as HTMLImageElement;
+      if (closeTimer.current) clearTimeout(closeTimer.current);
+      setZoomed({ src: img.currentSrc || img.src, alt: img.alt });
+      setOpen(true);
+    };
+
+    container.addEventListener("click", onClick);
+    return () => container.removeEventListener("click", onClick);
+  }, []);
+
+  const closeZoom = () => {
+    setOpen(false);
+    closeTimer.current = setTimeout(() => setZoomed(null), 300);
+  };
+
+  useEffect(() => {
+    if (!open) return;
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeZoom();
+    };
+
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open]);
 
   useEffect(() => {
     if (!contentRef.current) return;
@@ -56,10 +95,42 @@ export default function RetroContent({ htmlContent }: { htmlContent: string }) {
   }, [htmlContent]);
 
   return (
-    <div
-      ref={contentRef}
-      className="prose-retro text-lg leading-relaxed space-y-4"
-      dangerouslySetInnerHTML={{ __html: htmlContent }}
-    />
+    <>
+      <div
+        ref={contentRef}
+        className="prose-retro text-lg leading-relaxed space-y-4"
+        dangerouslySetInnerHTML={{ __html: htmlContent }}
+      />
+
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-hidden={!open}
+        aria-label={zoomed?.alt || "Preview gambar"}
+        onClick={closeZoom}
+        className={`fixed inset-0 z-[9999] bg-black/85 flex flex-col items-center justify-center gap-4 p-4 md:p-10 cursor-zoom-out transition-opacity duration-300 ease-out ${
+          open ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+      >
+        {zoomed && (
+          <>
+            <img
+              src={zoomed.src}
+              alt={zoomed.alt}
+              onClick={(e) => e.stopPropagation()}
+              className={`max-w-full max-h-[80vh] object-contain border-4 border-snes-textDark bg-white cursor-default [image-rendering:auto] transition-transform duration-300 ease-out ${
+                open ? "scale-100" : "scale-95"
+              }`}
+            />
+            <button
+              onClick={closeZoom}
+              className="px-4 py-1 border-4 border-snes-textDark bg-black text-snes-textDark font-bold uppercase text-sm hover:bg-snes-accent hover:text-white hover:border-snes-accent transition-colors"
+            >
+              [ CLOSE ]
+            </button>
+          </>
+        )}
+      </div>
+    </>
   );
 }
