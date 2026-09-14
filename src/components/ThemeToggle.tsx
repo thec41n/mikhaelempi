@@ -64,7 +64,7 @@ export default function ThemeToggle() {
       {glitching && (
         <div className="fixed inset-0 z-[9999] bg-white flex flex-col items-center justify-center overflow-hidden pointer-events-none mix-blend-difference">
            <div className="absolute inset-0 bg-black opacity-20 animate-noise w-[120%] h-[120%]" />
-           <h1 className="text-9xl font-bold uppercase animate-pulse text-black">LOADING...</h1>
+           <h1 className="text-5xl md:text-9xl font-bold uppercase animate-pulse text-black">LOADING...</h1>
         </div>
       )}
     </>
