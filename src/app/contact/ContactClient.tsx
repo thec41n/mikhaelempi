@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { SiGithub, SiLinkedin } from "react-icons/si";
+import { SiGithub, SiLinkedin, SiYoutube } from "react-icons/si";
 import { MdEmail, MdContentCopy, MdCheck } from "react-icons/md";
 
 export default function ContactClient() {
@@ -77,6 +77,16 @@ export default function ContactClient() {
                 <div className="border-4 border-snes-textLight dark:border-snes-textDark p-4 bg-white dark:bg-black hover:bg-[#0077B5] hover:text-white hover:border-[#0077B5] transition-all flex items-center gap-3">
                   <SiLinkedin className="text-2xl group-hover:scale-110 transition-transform" />
                   <span className="font-bold">LINKEDIN</span>
+                </div>
+              </Link>
+              <Link
+                href="https://www.youtube.com/@clinodex"
+                target="_blank"
+                className="group col-span-2"
+              >
+                <div className="border-4 border-snes-textLight dark:border-snes-textDark p-4 bg-white dark:bg-black hover:bg-[#FF0000] hover:text-white hover:border-[#FF0000] transition-all flex items-center gap-3">
+                  <SiYoutube className="text-2xl group-hover:scale-110 transition-transform" />
+                  <span className="font-bold">CLINODEX</span>
                 </div>
               </Link>
             </div>
