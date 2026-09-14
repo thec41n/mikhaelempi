@@ -19,10 +19,6 @@ export default function ContactClient() {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleInput = () => {
-    setStatus((s) => (s === "ok" || s === "error" ? "idle" : s));
-  };
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
@@ -38,6 +34,7 @@ export default function ContactClient() {
       if (data.success) {
         setStatus("ok");
         form.reset();
+        setTimeout(() => setStatus("idle"), 5000);
       } else {
         setStatus("error");
       }
@@ -131,11 +128,7 @@ export default function ContactClient() {
             &gt; SEND_ENCRYPTED_MSG
           </h3>
 
-          <form
-            className="space-y-4"
-            onSubmit={handleSubmit}
-            onInput={handleInput}
-          >
+          <form className="space-y-4" onSubmit={handleSubmit}>
             <input type="hidden" name="access_key" value={WEB3FORMS_KEY} />
             <input
               type="checkbox"
