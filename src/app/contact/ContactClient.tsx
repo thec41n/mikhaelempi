@@ -5,12 +5,41 @@ import Link from "next/link";
 import { SiGithub, SiLinkedin, SiYoutube } from "react-icons/si";
 import { MdEmail, MdContentCopy, MdCheck } from "react-icons/md";
 
+const WEB3FORMS_KEY = "de3a2b09-8bbc-4e8c-ac45-e58394fdbd04";
+
 export default function ContactClient() {
   const [copied, setCopied] = useState(false);
+  const [status, setStatus] = useState<"idle" | "sending" | "ok" | "error">(
+    "idle",
+  );
+
   const handleCopyEmail = () => {
     navigator.clipboard.writeText("d.mikhaelempi@gmail.com");
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    setStatus("sending");
+
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: new FormData(form),
+      });
+      const data = await res.json();
+
+      if (data.success) {
+        setStatus("ok");
+        form.reset();
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
   };
 
   return (
@@ -98,43 +127,94 @@ export default function ContactClient() {
             &gt; SEND_ENCRYPTED_MSG
           </h3>
 
-          <form className="space-y-4">
+          <form className="space-y-4" onSubmit={handleSubmit}>
+            <input type="hidden" name="access_key" value={WEB3FORMS_KEY} />
+            <input
+              type="hidden"
+              name="subject"
+              value="New transmission from portfolio"
+            />
+            <input
+              type="checkbox"
+              name="botcheck"
+              tabIndex={-1}
+              autoComplete="off"
+              className="hidden"
+              aria-hidden="true"
+            />
+
             <div>
-              <label className="block text-sm font-bold mb-1 opacity-80">
+              <label
+                htmlFor="contact-name"
+                className="block text-sm font-bold mb-1 opacity-80"
+              >
                 CODENAME (Name)
               </label>
               <input
+                id="contact-name"
+                name="name"
                 type="text"
+                required
                 className="w-full bg-gray-100 dark:bg-gray-900 text-snes-textLight dark:text-snes-textDark placeholder-gray-500 dark:placeholder-[#00FF41]/50 border-4 border-transparent border-b-snes-textLight dark:border-b-snes-textDark focus:border-snes-accent dark:focus:border-snes-accent p-3 outline-none transition-colors duration-300 font-mono"
                 placeholder="Enter your name..."
               />
             </div>
             <div>
-              <label className="block text-sm font-bold mb-1 opacity-80">
+              <label
+                htmlFor="contact-email"
+                className="block text-sm font-bold mb-1 opacity-80"
+              >
                 RETURN ADDRESS (Email)
               </label>
               <input
+                id="contact-email"
+                name="email"
                 type="email"
+                required
                 className="w-full bg-gray-100 dark:bg-gray-900 text-snes-textLight dark:text-snes-textDark placeholder-gray-500 dark:placeholder-[#00FF41]/50 border-4 border-transparent border-b-snes-textLight dark:border-b-snes-textDark focus:border-snes-accent dark:focus:border-snes-accent p-3 outline-none transition-colors duration-300 font-mono"
                 placeholder="Enter your email..."
               />
             </div>
             <div>
-              <label className="block text-sm font-bold mb-1 opacity-80">
+              <label
+                htmlFor="contact-message"
+                className="block text-sm font-bold mb-1 opacity-80"
+              >
                 DATA PACKET (Message)
               </label>
               <textarea
+                id="contact-message"
+                name="message"
                 rows={5}
+                required
                 className="w-full bg-gray-100 dark:bg-gray-900 text-snes-textLight dark:text-snes-textDark placeholder-gray-500 dark:placeholder-[#00FF41]/50 border-4 border-transparent border-b-snes-textLight dark:border-b-snes-textDark focus:border-snes-accent dark:focus:border-snes-accent p-3 outline-none transition-colors duration-300 font-mono resize-none"
                 placeholder="Type your message here..."
               />
             </div>
             <button
               type="submit"
-              className="w-full py-4 bg-snes-textLight text-white dark:bg-snes-textDark dark:text-black font-bold text-xl hover:bg-snes-accent hover:text-white dark:hover:bg-snes-accent dark:hover:text-white transition-all duration-300 active:scale-95 uppercase tracking-widest mt-4"
+              disabled={status === "sending"}
+              className="w-full py-4 bg-snes-textLight text-white dark:bg-snes-textDark dark:text-black font-bold text-xl hover:bg-snes-accent hover:text-white dark:hover:bg-snes-accent dark:hover:text-white transition-all duration-300 active:scale-95 uppercase tracking-widest mt-4 disabled:opacity-50 disabled:cursor-wait"
             >
-              [ EXECUTE SEND ]
+              {status === "sending" ? "[ TRANSMITTING... ]" : "[ EXECUTE SEND ]"}
             </button>
+
+            {status === "ok" && (
+              <p
+                role="status"
+                className="text-sm font-bold text-green-600 dark:text-green-400 animate-pulse"
+              >
+                &gt; TRANSMISSION RECEIVED. I&apos;LL REPLY SOON!
+              </p>
+            )}
+            {status === "error" && (
+              <p
+                role="status"
+                className="text-sm font-bold text-red-600 dark:text-red-400"
+              >
+                &gt; TRANSMISSION FAILED. EMAIL ME DIRECTLY INSTEAD.
+              </p>
+            )}
           </form>
         </div>
       </div>
