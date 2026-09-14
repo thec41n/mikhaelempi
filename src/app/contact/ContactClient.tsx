@@ -12,6 +12,7 @@ export default function ContactClient() {
   const [status, setStatus] = useState<"idle" | "sending" | "ok" | "error">(
     "idle",
   );
+  const [noticeOpen, setNoticeOpen] = useState(false);
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText("d.mikhaelempi@gmail.com");
@@ -23,6 +24,7 @@ export default function ContactClient() {
     e.preventDefault();
     const form = e.currentTarget;
     setStatus("sending");
+    setNoticeOpen(false);
 
     try {
       const res = await fetch("https://api.web3forms.com/submit", {
@@ -34,12 +36,15 @@ export default function ContactClient() {
       if (data.success) {
         setStatus("ok");
         form.reset();
-        setTimeout(() => setStatus("idle"), 5000);
+        setNoticeOpen(true);
+        setTimeout(() => setNoticeOpen(false), 5000);
       } else {
         setStatus("error");
+        setNoticeOpen(true);
       }
     } catch {
       setStatus("error");
+      setNoticeOpen(true);
     }
   };
 
@@ -199,22 +204,35 @@ export default function ContactClient() {
               &gt; USUAL RESPONSE TIME: 1-2 DAYS
             </p>
 
-            {status === "ok" && (
-              <p
-                role="status"
-                className="text-sm font-bold text-green-600 dark:text-green-400 animate-pulse"
-              >
-                &gt; TRANSMISSION RECEIVED. I&apos;LL REPLY SOON!
-              </p>
-            )}
-            {status === "error" && (
-              <p
-                role="status"
-                className="text-sm font-bold text-red-600 dark:text-red-400"
-              >
-                &gt; TRANSMISSION FAILED. EMAIL ME DIRECTLY INSTEAD.
-              </p>
-            )}
+            <div
+              aria-hidden={!noticeOpen}
+              className={`grid transition-all duration-500 ease-out ${
+                noticeOpen
+                  ? "grid-rows-[1fr] opacity-100"
+                  : "grid-rows-[0fr] opacity-0"
+              }`}
+            >
+              <div className="overflow-hidden">
+                <p
+                  className={`text-sm font-bold pt-2 ${
+                    status === "error"
+                      ? "text-red-600 dark:text-red-400"
+                      : "text-green-600 dark:text-green-400 animate-pulse"
+                  }`}
+                >
+                  {status === "error"
+                    ? "> TRANSMISSION FAILED. EMAIL ME DIRECTLY INSTEAD."
+                    : "> TRANSMISSION RECEIVED. I'LL REPLY SOON!"}
+                </p>
+              </div>
+            </div>
+
+            <p role="status" className="sr-only">
+              {noticeOpen && status === "ok" && "Message sent. I'll reply soon."}
+              {noticeOpen &&
+                status === "error" &&
+                "Message failed to send. Please email me directly instead."}
+            </p>
           </form>
         </div>
       </div>
