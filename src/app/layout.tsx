@@ -3,7 +3,7 @@ import { VT323 } from "next/font/google";
 import "./globals.css";
 import Sidebar from "../components/Sidebar";
 import FloatingNav from "../components/FloatingNav";
-import { SITE_ORIGIN, SITE_URL } from "../lib/site";
+import { SITE_HOME, SITE_ORIGIN } from "../lib/site";
 import "highlight.js/styles/monokai-sublime.css";
 
 const pixelFont = VT323({
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     "Frontend",
   ],
 
-  authors: [{ name: "Devi Mikhael Empi", url: SITE_URL }],
+  authors: [{ name: "Devi Mikhael Empi", url: SITE_HOME }],
   creator: "Devi Mikhael Empi",
 
   verification: {
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    url: SITE_URL,
+    url: SITE_HOME,
     siteName: "Devi Mikhael Empi",
     locale: "en_US",
     type: "website",

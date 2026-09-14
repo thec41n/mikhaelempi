@@ -3,11 +3,11 @@ import Image from "next/image";
 import Typewriter from "../components/Typewriter";
 import avatarImg from "../assets/images/avatar.png";
 import Link from "next/link";
-import { SITE_URL } from "../lib/site";
+import { SITE_HOME } from "../lib/site";
 
 export const metadata: Metadata = {
   alternates: {
-    canonical: SITE_URL,
+    canonical: SITE_HOME,
   },
 };
 

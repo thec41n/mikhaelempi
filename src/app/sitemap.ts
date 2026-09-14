@@ -1,12 +1,12 @@
 import type { MetadataRoute } from "next";
 import { getSortedPostsData } from "../lib/posts";
-import { SITE_URL } from "../lib/site";
+import { SITE_HOME, SITE_URL } from "../lib/site";
 
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const pages: MetadataRoute.Sitemap = [
-    { url: SITE_URL, priority: 1 },
+    { url: SITE_HOME, priority: 1 },
     { url: `${SITE_URL}/about`, priority: 0.8 },
     { url: `${SITE_URL}/projects`, priority: 0.8 },
     { url: `${SITE_URL}/resume`, priority: 0.8 },
