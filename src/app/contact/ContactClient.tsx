@@ -19,6 +19,10 @@ export default function ContactClient() {
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const handleInput = () => {
+    setStatus((s) => (s === "ok" || s === "error" ? "idle" : s));
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
@@ -127,13 +131,12 @@ export default function ContactClient() {
             &gt; SEND_ENCRYPTED_MSG
           </h3>
 
-          <form className="space-y-4" onSubmit={handleSubmit}>
+          <form
+            className="space-y-4"
+            onSubmit={handleSubmit}
+            onInput={handleInput}
+          >
             <input type="hidden" name="access_key" value={WEB3FORMS_KEY} />
-            <input
-              type="hidden"
-              name="subject"
-              value="New transmission from portfolio"
-            />
             <input
               type="checkbox"
               name="botcheck"
@@ -198,6 +201,10 @@ export default function ContactClient() {
             >
               {status === "sending" ? "[ TRANSMITTING... ]" : "[ EXECUTE SEND ]"}
             </button>
+
+            <p className="text-xs font-mono opacity-60 text-center">
+              &gt; USUAL RESPONSE TIME: 1-2 DAYS
+            </p>
 
             {status === "ok" && (
               <p
