@@ -3,6 +3,7 @@ import { VT323 } from "next/font/google";
 import "./globals.css";
 import Sidebar from "../components/Sidebar";
 import FloatingNav from "../components/FloatingNav";
+import ScrollToTop from "../components/ScrollToTop";
 import { SITE_HOME, SITE_ORIGIN } from "../lib/site";
 import "highlight.js/styles/monokai-sublime.css";
 
@@ -84,12 +85,13 @@ export default function RootLayout({
         </div>
 
         <Sidebar />
-        <main className="flex-1 p-6 md:p-12 pb-28 md:pb-12 overflow-y-auto h-screen">
+        <main className="flex-1 p-6 md:p-12 pb-28 md:pb-12 min-w-0">
           <div className="max-w-4xl mx-auto border-4 border-snes-textLight dark:border-snes-textDark p-6 min-h-[500px] shadow-[8px_8px_0px_0px_rgba(44,44,44,0.3)] bg-white/10">
             {children}
           </div>
         </main>
         <FloatingNav />
+        <ScrollToTop />
       </body>
     </html>
   );
