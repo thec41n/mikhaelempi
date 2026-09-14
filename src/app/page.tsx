@@ -1,7 +1,15 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Typewriter from "../components/Typewriter";
 import avatarImg from "../assets/images/avatar.png";
 import Link from "next/link";
+import { SITE_URL } from "../lib/site";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: SITE_URL,
+  },
+};
 
 export default function Home() {
   return (

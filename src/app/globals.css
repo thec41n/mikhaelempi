@@ -67,7 +67,38 @@ body {
 .dark body {
   background-color: var(--color-snes-dark);
   color: var(--color-snes-textDark);
-  -color-snes-accent: #637afe;
+  --color-snes-accent: #637afe;
+}
+
+/* Boot Screen */
+@keyframes boot-bar {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes boot-out {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+#boot-screen {
+  animation: boot-out 0.4s steps(4) 1.4s forwards;
+}
+
+#boot-screen .boot-bar {
+  animation: boot-bar 1.4s steps(12) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #boot-screen {
+    display: none;
+  }
 }
 
 /* Noise Animation */

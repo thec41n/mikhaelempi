@@ -1,5 +1,7 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { getSortedPostsData, getPostData } from "../../../lib/posts";
+import { SITE_URL } from "../../../lib/site";
 import RetroContent from "./RetroContent";
 
 export async function generateStaticParams() {
@@ -7,6 +9,33 @@ export async function generateStaticParams() {
   return posts.map((post) => ({
     id: post.id,
   }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+  const post = await getPostData(id);
+
+  return {
+    title: post.title,
+    description: post.description,
+    keywords: post.tags,
+    alternates: {
+      canonical: `${SITE_URL}/blog/${id}`,
+    },
+    openGraph: {
+      type: "article",
+      title: post.title,
+      description: post.description,
+      url: `${SITE_URL}/blog/${id}`,
+      publishedTime: post.date,
+      authors: ["Devi Mikhael Empi"],
+      images: [`${SITE_URL}/opengraph-image.png`],
+    },
+  };
 }
 
 export default async function Post({

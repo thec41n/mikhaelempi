@@ -1,4 +1,15 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+import { SITE_URL } from "../../lib/site";
+
+export const metadata: Metadata = {
+  title: "Resume",
+  description:
+    "Resume and CV of Devi Mikhael Empi, Full-Stack Developer — work history, education, and technical skills, available to preview and download.",
+  alternates: {
+    canonical: `${SITE_URL}/resume`,
+  },
+};
 
 export default function ResumePage() {
   return (

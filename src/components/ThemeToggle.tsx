@@ -56,7 +56,7 @@ export default function ThemeToggle() {
     <>
       <button
         onClick={handleToggle}
-        className="w-full border-4 border-snes-textLight p-2 font-bold hover:bg-snes-accent hover:text-white transition-colors flex justify-center items-center gap-2"
+        className="w-full border-4 border-snes-textLight dark:border-snes-textDark p-2 font-bold hover:bg-snes-accent hover:text-white transition-colors flex justify-center items-center gap-2"
       >
         <span>{theme === "light" ? "☀ MODE: ON" : "☾ MODE: OFF"}</span>
       </button>

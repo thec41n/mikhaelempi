@@ -48,22 +48,33 @@ export const educationData = [
 
 export const experienceData = [
   {
+    institution: "Alner",
+    year: "Jun 2026 - Present",
+    title: "Full-Stack Developer",
+    points: [
+      "Shipped full-stack features across 8 production services using Go, Next.js, Laravel, and Odoo.",
+      "Fixed a silent ERP sync bug causing 4,775 stale price rows (63% of table).",
+      "Audited 67 Go repository methods, fixing 32 silent auto-commits in a dormant transaction layer.",
+    ],
+  },
+  {
+    institution: "Coding Camp powered by DBS Foundation",
+    year: "Jan 2026 - Jul 2026",
+    title: "Full-Stack Web Developer Facilitator",
+    points: [
+      "Facilitated 25 full-stack mentees, ensuring high graduation rates through tailored guidance.",
+      "Maintained a 4.90+/5.00 satisfaction rating across 7 consecutive periods.",
+      "Featured as Speaker at Coding Camp Corner #2, presenting capstone strategies.",
+    ],
+  },
+  {
     institution: "PT HiThink Technology Indonesia",
-    year: "Jul 2025 - Present",
+    year: "Jul 2025 - Jun 2026",
     title: "Software Engineer",
     points: [
       "Engineered mission-critical backend services for Japanese government systems (Tax & Fire Dept).",
       "Configured and deployed development environments on Windows Server utilizing VMware.",
       "Pursued Japanese language proficiency (N5-N3) for direct client collaboration.",
-    ],
-  },
-  {
-    institution: "Syntera Innovations",
-    year: "Oct 2024 - Present",
-    title: "Co-Founder",
-    points: [
-      "Leading technical initiatives and business development strategies.",
-      "Building innovative digital solutions from the ground up.",
     ],
   },
   {

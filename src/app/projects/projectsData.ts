@@ -1,5 +1,13 @@
 export const projectsData = [
   {
+    title: "Alner",
+    desc: "Indonesia's first reusable packaging system, cutting single-use plastic waste through a return-and-refill loop with cashback rewards.",
+    tags: ["Go", "Next.js", "Laravel", "Odoo"],
+    link: "https://alner.id/",
+    color: "#D35400",
+    image: "image/alner.jpg"
+  },
+  {
     title: "Kue Yanti E-Commerce",
     desc: "MERN stack e-commerce platform facilitating traditional snack sales, fully integrated with Midtrans payment gateway.",
     tags: ["MongoDB", "Express", "React", "Node.js"],

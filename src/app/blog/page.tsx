@@ -1,5 +1,16 @@
+import type { Metadata } from "next";
 import { getSortedPostsData } from "../../lib/posts";
+import { SITE_URL } from "../../lib/site";
 import BlogClient from "./BlogClient";
+
+export const metadata: Metadata = {
+  title: "Blog",
+  description:
+    "Developer notes and tutorials by Devi Mikhael Empi on web development, backend engineering, and everyday tooling.",
+  alternates: {
+    canonical: `${SITE_URL}/blog`,
+  },
+};
 
 export default function BlogPage() {
   const allPosts = getSortedPostsData();
