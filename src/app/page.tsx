@@ -3,7 +3,7 @@ import Image from "next/image";
 import Typewriter from "../components/Typewriter";
 import avatarImg from "../assets/images/avatar.png";
 import Link from "next/link";
-import { SITE_HOME } from "../lib/site";
+import { SITE_HOME, SITE_URL } from "../lib/site";
 
 export const metadata: Metadata = {
   alternates: {
@@ -11,9 +11,45 @@ export const metadata: Metadata = {
   },
 };
 
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Devi Mikhael Empi",
+  alternateName: ["Mikhael Empi", "Mikhael", "El", "clinodex"],
+  url: SITE_HOME,
+  image: `${SITE_URL}/opengraph-image.png`,
+  email: "mailto:d.mikhaelempi@gmail.com",
+  jobTitle: "Full-Stack Developer",
+  nationality: "Indonesian",
+  alumniOf: {
+    "@type": "CollegeOrUniversity",
+    name: "Universitas Gunadarma",
+  },
+  knowsAbout: [
+    "Web Development",
+    "Backend Engineering",
+    "Cyber Security",
+    "Go",
+    "Next.js",
+    "Laravel",
+    "Express.js",
+    "Python"
+  ],
+  sameAs: [
+    "https://github.com/thec41n",
+    "https://linkedin.com/in/mikhaelempi",
+    "https://www.youtube.com/@clinodex",
+    "https://www.instagram.com/clinodex",
+  ],
+};
+
 export default function Home() {
   return (
     <div className="flex flex-col gap-12">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+      />
       <section className="flex flex-col md:flex-row items-center gap-8 border-b-4 border-snes-textLight dark:border-snes-textDark pb-12 border-dashed">
         <div className="relative w-48 h-48 bg-snes-accent border-4 border-snes-textLight dark:border-snes-textDark shadow-[8px_8px_0px_0px_rgba(44,44,44,1)] dark:shadow-[8px_8px_0px_0px_#637AFE] shrink-0 overflow-hidden">
           <Image
@@ -68,6 +104,27 @@ export default function Home() {
             <br />
             <br />
             Always ready for new challenges and collaborative quests!
+            <br />
+            <br />
+            You can also find me as{" "}
+            <a
+              href="https://www.youtube.com/@clinodex"
+              target="_blank"
+              rel="me noopener"
+              className="font-bold text-snes-accent underline"
+            >
+              clinodex
+            </a>{" "}
+            on YouTube and{" "}
+            <a
+              href="https://www.instagram.com/clinodex"
+              target="_blank"
+              rel="me noopener"
+              className="font-bold text-snes-accent underline"
+            >
+              clinodex
+            </a>{" "}
+            on Instagram.
           </p>
         </div>
       </section>

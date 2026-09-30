@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { SiGithub, SiLinkedin, SiYoutube } from "react-icons/si";
+import { SiGithub, SiInstagram, SiLinkedin, SiYoutube } from "react-icons/si";
 import { MdEmail, MdContentCopy, MdCheck } from "react-icons/md";
 
 const WEB3FORMS_KEY = "de3a2b09-8bbc-4e8c-ac45-e58394fdbd04";
@@ -117,11 +117,21 @@ export default function ContactClient() {
               <Link
                 href="https://www.youtube.com/@clinodex"
                 target="_blank"
-                className="group col-span-2"
+                className="group"
               >
                 <div className="border-4 border-snes-textLight dark:border-snes-textDark p-4 bg-white dark:bg-black hover:bg-[#FF0000] hover:text-white hover:border-[#FF0000] transition-all flex items-center gap-3">
                   <SiYoutube className="text-2xl group-hover:scale-110 transition-transform" />
                   <span className="font-bold">CLINODEX</span>
+                </div>
+              </Link>
+              <Link
+                href="https://www.instagram.com/clinodex"
+                target="_blank"
+                className="group"
+              >
+                <div className="border-4 border-snes-textLight dark:border-snes-textDark p-4 bg-white dark:bg-black hover:bg-[#E1306C] hover:text-white hover:border-[#E1306C] transition-all flex items-center gap-3">
+                  <SiInstagram className="text-2xl group-hover:scale-110 transition-transform" />
+                  <span className="font-bold">@CLINODEX</span>
                 </div>
               </Link>
             </div>

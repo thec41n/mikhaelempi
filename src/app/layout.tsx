@@ -27,6 +27,7 @@ export const metadata: Metadata = {
   keywords: [
     "Devi Mikhael Empi",
     "Mikhael Empi",
+    "clinodex",
     "Software Engineer",
     "Full-Stack Developer",
     "Portfolio",
